@@ -20,19 +20,31 @@ export class Timecode {
     this.hours += timeCode.hours;
     this.minutes += timeCode.minutes;
     this.seconds += timeCode.seconds;
+    this.frames += timeCode.frames;
+    if (this.seconds >= 60) {
+      this.seconds -= 60;
+      this.minutes += 1;
+    }
+
+    if (this.minutes >= 60) {
+      this.minutes -= 60;
+      this.hours += 1;
+    }
   }
 
   subtract(timeCode: Timecode) {
     this.hours -= timeCode.hours;
     this.minutes -= timeCode.minutes;
     this.seconds -= timeCode.seconds;
-  }
-
-  static duration(tc1: Timecode, tc2: Timecode): Timecode {
-    const hours = tc1.hours - tc2.hours;
-    const minutes = tc1.minutes - tc2.minutes;
-    const seconds = tc1.seconds - tc2.seconds;
-    return new Timecode(hours, minutes, seconds, tc1.frames);
+    this.frames -= timeCode.frames;
+    if (this.seconds < 0) {
+      this.seconds += 60;
+      this.minutes -= 1;
+    }
+    if (this.minutes < 0) {
+      this.minutes += 60;
+      this.hours -= 1;
+    }
   }
 
   private numberToString(num: number) {

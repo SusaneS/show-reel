@@ -3,6 +3,7 @@ import {Showreel} from "../models/showreel";
 import {Timecode} from "../models/timecode";
 import {getVideos} from "../video-clips";
 import {Clip} from "../models/clip";
+import {Standard} from "../models/standard";
 
 @Component({
   selector: 'app-showreel',
@@ -17,6 +18,9 @@ export class ShowreelComponent {
       duration: new Timecode(0, 0, 0, 0),
       videoClips: [] as Clip[]
     } as Showreel;
+
+    private readonly NTSC_FRAMES = 30;
+    private readonly PAL_FRAMES = 25;
 
   selectNewVideo() {
     this.isSelectedClipValid = true;
@@ -33,7 +37,18 @@ export class ShowreelComponent {
         return;
       }
     }
-    this.showreel.duration.addOn(Timecode.duration(this.selectedClip.end, this.selectedClip.start));
     this.showreel.videoClips.push(this.selectedClip);
+    this.calculateDurationWhenVideoAdded();
+  }
+
+  private calculateDurationWhenVideoAdded() {
+    this.showreel.duration.addOn(this.selectedClip.end);
+    this.showreel.duration.subtract(this.selectedClip.start);
+    const frames = this.showreel.duration.frames;
+    const frameDif = this.showreel.standard === Standard.NTSC ? frames/this.NTSC_FRAMES : frames/this.PAL_FRAMES;
+    if (frameDif >= 1) {
+      this.showreel.duration.seconds += Math.floor(frameDif);
+      this.showreel.duration.frames = frames - (this.showreel.standard === Standard.NTSC ? this.NTSC_FRAMES : this.PAL_FRAMES);
+    }
   }
 }

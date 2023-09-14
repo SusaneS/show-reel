@@ -57,7 +57,7 @@ describe('ShowreelComponent', () => {
         definition: Definition.SD,
         standard: Standard.NTSC,
         duration: new Timecode(0,0, 0, 0),
-        videoClips: []
+        videoClips: [{name: 'Test'} as Clip]
       } as Showreel;
       fixture.detectChanges();
     });
@@ -68,8 +68,30 @@ describe('ShowreelComponent', () => {
       select.dispatchEvent(new Event('change'));
       fixture.detectChanges();
 
-      expect(component.showreel.videoClips.length).toBe(0);
       expect(component.isSelectedClipValid).toBe(false);
+    });
+  });
+
+  describe('removing video clip', () => {
+    beforeEach(() => {
+      component.showreel = {
+        name: 'Test',
+        definition: Definition.SD,
+        standard: Standard.PAL,
+        duration: new Timecode(0,2, 35, 20),
+        videoClips: sdPalVideoClips()
+      } as Showreel;
+      fixture.detectChanges();
+    });
+
+    it('it should remove video clip from showreel and update duration', () => {
+      const removeButton = fixture.debugElement.query(By.css('#button-1')).nativeElement;
+      removeButton.click();
+
+      fixture.detectChanges();
+
+      expect(component.showreel.videoClips.length).toBe(1);
+      expect(component.showreel.duration.seconds).toBe(20);
     });
   });
 
@@ -97,5 +119,24 @@ describe('ShowreelComponent', () => {
         end: new Timecode(0, 0, 15, 10)
       } as Clip
     ]
+  }
+
+  function sdPalVideoClips() {
+    return [
+      {
+        name: 'Clip1',
+        standard: Standard.PAL,
+        definition: Definition.SD,
+        start: new Timecode(0, 0, 0, 0),
+        end: new Timecode(0, 1, 20, 10)
+      } as Clip,
+      {
+        name: 'Clip2',
+        standard: Standard.PAL,
+        definition: Definition.SD,
+        start: new Timecode(0, 0, 0, 0),
+        end: new Timecode(0, 1, 15, 10)
+      } as Clip
+    ];
   }
 });

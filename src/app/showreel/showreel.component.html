@@ -23,8 +23,8 @@
   </div>
 
   <p>List of videos:</p>
-  <ul *ngFor="let clip of showreel?.videoClips ">
-    <li>{{clip.name}}  <button (click)="removeVideo(clip)">X</button></li>
+  <ul *ngFor="let clip of showreel?.videoClips; index as i">
+    <li>{{clip.name}}  <button id="button-{{i}}" (click)="removeVideo(clip)">X</button></li>
   </ul>
 </div>
 

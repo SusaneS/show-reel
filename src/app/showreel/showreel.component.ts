@@ -27,7 +27,7 @@ export class ShowreelComponent {
     if (!this.selectedClip) {
       return;
     }
-    if (!this.showreel.standard || this.showreel.videoClips.length === 0) {
+    if (!this.showreel.standard || (this.showreel.standard && this.showreel.videoClips.length === 0)) {
       this.showreel.standard = this.selectedClip.standard;
       this.showreel.definition = this.selectedClip.definition;
     } else {

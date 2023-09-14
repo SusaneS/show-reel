@@ -1,0 +1,9 @@
+.row {
+  display: flex;
+  height: 20px;
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+}

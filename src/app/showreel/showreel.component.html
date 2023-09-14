@@ -1,2 +1,30 @@
-<p>showreel works!</p>
-<p>test commit</p>
+<p>showreel works!
+
+
+
+<div>
+  <div class="row">
+    <span>Name</span>
+    <input id="name">
+  </div>
+  <div class="row">
+    <span>Duration: </span>
+    <p [(ngModel)]="showreel.duration">{{showreel.duration.format()}}</p>
+  </div>
+  <p>List of videos:</p>
+  <ul *ngFor="let clip of showreel?.videoClips ">
+    <li>{{clip.name}}</li>
+  </ul>
+
+  <div>
+    <div>
+      <select (change)="selectNewVideo()" [(ngModel)]="selectedClip">
+        <option *ngFor="let clip of availableClips" [ngValue]="clip">
+          {{clip.name}}, {{clip.standard}}, {{clip.definition}}
+        </option>
+      </select>
+    </div>
+    <span class="error" *ngIf="!isSelectedClipValid">Please select a video clip with standard and definition that matches showreel.</span>
+  </div>
+</div>
+

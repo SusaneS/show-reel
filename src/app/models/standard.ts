@@ -1,4 +1,4 @@
 export enum Standard {
-  PAL,
-  NTSC
+  PAL = 'PAL',
+  NTSC = 'NTSC'
 }

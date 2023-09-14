@@ -1,4 +1,4 @@
 export enum Definition {
-  SD,
-  HD
+  SD= 'SD',
+  HD = 'HD'
 }

@@ -1,6 +1,6 @@
-import {Standard} from "./standard";
-import {Definition} from "./definition";
-import {Timecode} from "./timecode";
+import {Standard} from "../models/standard";
+import {Definition} from "../models/definition";
+import {Timecode} from "../models/timecode";
 
 export interface Clip {
   name: string,

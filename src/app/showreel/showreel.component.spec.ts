@@ -2,10 +2,10 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ShowreelComponent} from './showreel.component';
 import {FormsModule} from "@angular/forms";
-import {Showreel} from "../models/showreel";
+import {Showreel} from "./showreel";
 import {Definition} from "../models/definition";
 import {Standard} from "../models/standard";
-import {Clip} from "../models/clip";
+import {Clip} from "./clip";
 import {Timecode} from "../models/timecode";
 import {By} from "@angular/platform-browser";
 

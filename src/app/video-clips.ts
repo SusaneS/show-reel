@@ -1,4 +1,4 @@
-import {Clip} from "./models/clip";
+import {Clip} from "./showreel/clip";
 import {Standard} from "./models/standard";
 import {Definition} from "./models/definition";
 import {Timecode} from "./models/timecode";

@@ -24,7 +24,7 @@
 
   <p>List of videos:</p>
   <ul *ngFor="let clip of showreel?.videoClips ">
-    <li>{{clip.name}}</li>
+    <li>{{clip.name}}  <button (click)="removeVideo(clip)">X</button></li>
   </ul>
 </div>
 

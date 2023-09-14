@@ -1,6 +1,6 @@
-import {Definition} from "./definition";
-import {Standard} from "./standard";
-import {Timecode} from "./timecode";
+import {Definition} from "../models/definition";
+import {Standard} from "../models/standard";
+import {Timecode} from "../models/timecode";
 import {Clip} from "./clip";
 
 export interface Showreel {

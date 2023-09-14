@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {Showreel} from "../models/showreel";
+import {Showreel} from "./showreel";
 import {Timecode} from "../models/timecode";
 import {getVideos} from "../video-clips";
-import {Clip} from "../models/clip";
+import {Clip} from "./clip";
 import {Standard} from "../models/standard";
 
 @Component({
@@ -27,7 +27,7 @@ export class ShowreelComponent {
     if (!this.selectedClip) {
       return;
     }
-    if (!this.showreel.standard) {
+    if (!this.showreel.standard || this.showreel.videoClips.length === 0) {
       this.showreel.standard = this.selectedClip.standard;
       this.showreel.definition = this.selectedClip.definition;
     } else {
@@ -41,6 +41,12 @@ export class ShowreelComponent {
     this.calculateDurationWhenVideoAdded();
   }
 
+  removeVideo(clip: Clip) {
+    const index = this.showreel.videoClips.findIndex(c => c.name === clip.name);
+    this.showreel.videoClips.splice(index, 1);
+    this.calculateDurationWhenVideoRemoved(clip);
+  }
+
   private calculateDurationWhenVideoAdded() {
     this.showreel.duration.addOn(this.selectedClip.end);
     this.showreel.duration.subtract(this.selectedClip.start);
@@ -49,6 +55,16 @@ export class ShowreelComponent {
     if (frameDif >= 1) {
       this.showreel.duration.seconds += Math.floor(frameDif);
       this.showreel.duration.frames = frames - (this.showreel.standard === Standard.NTSC ? this.NTSC_FRAMES : this.PAL_FRAMES);
+    }
+  }
+
+  private calculateDurationWhenVideoRemoved(clip: Clip) {
+    this.showreel.duration.subtract(clip.end);
+    this.showreel.duration.addOn(clip.start);
+    const frames = this.showreel.duration.frames;
+    if (frames < 0) {
+      this.showreel.duration.frames = frames + (this.showreel.standard === Standard.NTSC ? this.NTSC_FRAMES : this.PAL_FRAMES);
+      this.showreel.duration.seconds -= 1;
     }
   }
 }

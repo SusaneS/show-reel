@@ -33,6 +33,7 @@ export class ShowreelComponent {
         return;
       }
     }
+    this.showreel.duration.addOn(Timecode.duration(this.selectedClip.end, this.selectedClip.start));
     this.showreel.videoClips.push(this.selectedClip);
   }
 }

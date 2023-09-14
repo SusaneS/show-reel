@@ -1,11 +1,11 @@
-<p>showreel works!
-
-
-
 <div>
   <div class="row">
     <span>Name</span>
-    <input id="name">
+    <input [(ngModel)]="showreel.name" id="name">
+  </div>
+  <div class="row">
+    <span>Show-reel name</span>
+    <span>{{showreel.name}}</span>
   </div>
   <div class="row">
     <span>Duration: </span>

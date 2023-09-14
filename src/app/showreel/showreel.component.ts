@@ -18,7 +18,7 @@ export class ShowreelComponent {
       videoClips: [] as Clip[]
     } as Showreel;
 
-  selectNewVideo(){
+  selectNewVideo() {
     this.isSelectedClipValid = true;
     if (!this.selectedClip) {
       return;

@@ -9,13 +9,8 @@
   </div>
   <div class="row">
     <span>Duration: </span>
-    <p [(ngModel)]="showreel.duration">{{showreel.duration.format()}}</p>
+    <span [(ngModel)]="showreel.duration">{{showreel.duration.format()}}</span>
   </div>
-  <p>List of videos:</p>
-  <ul *ngFor="let clip of showreel?.videoClips ">
-    <li>{{clip.name}}</li>
-  </ul>
-
   <div>
     <div>
       <select (change)="selectNewVideo()" [(ngModel)]="selectedClip">
@@ -26,5 +21,10 @@
     </div>
     <span class="error" *ngIf="!isSelectedClipValid">Please select a video clip with standard and definition that matches showreel.</span>
   </div>
+
+  <p>List of videos:</p>
+  <ul *ngFor="let clip of showreel?.videoClips ">
+    <li>{{clip.name}}</li>
+  </ul>
 </div>
 

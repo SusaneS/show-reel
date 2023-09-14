@@ -9,11 +9,11 @@
   </div>
   <div class="row">
     <span>Duration: </span>
-    <span [(ngModel)]="showreel.duration">{{showreel.duration.format()}}</span>
+    <span [(ngModel)]="showreel.duration" ngDefaultControl>{{showreel.duration.format()}}</span>
   </div>
   <div>
     <div>
-      <select (change)="selectNewVideo()" [(ngModel)]="selectedClip">
+      <select id="video-clips" (change)="selectNewVideo()" [(ngModel)]="selectedClip" ngDefaultControl>
         <option *ngFor="let clip of availableClips" [ngValue]="clip">
           {{clip.name}}, {{clip.standard}}, {{clip.definition}}
         </option>

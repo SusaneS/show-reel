@@ -1,3 +1,5 @@
+// This class could've been implemented way better probably but due to lack of time
+// didn't have so much room for checking requirements and got a bit confused with frames
 export class Timecode {
   hours: number;
   minutes: number;

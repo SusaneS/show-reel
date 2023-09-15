@@ -47,6 +47,8 @@ export class ShowreelComponent {
     this.calculateDurationWhenVideoRemoved(clip);
   }
 
+  // Both duration calculations could use some refactoring
+  // Still not sure if frames math is correct
   private calculateDurationWhenVideoAdded() {
     this.showreel.duration.addOn(this.selectedClip.end);
     this.showreel.duration.subtract(this.selectedClip.start);
